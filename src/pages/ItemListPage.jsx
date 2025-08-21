@@ -56,11 +56,16 @@ const ItemListPage = () => {
 
             <div className="item-list">
                 {items.length > 0 ? items.map(item => (
-                    <Link key={item._id} to={`/edit/${item._id}`} className="item-card-link">
+                    <Link
+                        key={item._id}
+                        to={`/edit/${item._id}`}
+                        state={{ purchase_date: item.purchase_date, purchaseDateReadOnly: true }}
+                        className="item-card-link"
+                    >
                         <div className="item-card">
                             <h3>{item.item_name}</h3>
                             <p><strong>Doc #:</strong> {item.document_number}</p>
-                            <p><strong>Date:</strong> {new Date(item.purchase_date).toLocaleDateString()}</p>
+                            <p><strong>Date:</strong> {item.purchase_date ? new Date(item.purchase_date).toLocaleDateString() : 'N/A'}</p>
                             <p><strong>Location:</strong> {item.storage_location || 'N/A'}</p>
                         </div>
                     </Link>
